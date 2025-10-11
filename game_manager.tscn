@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce7t6xe5ywl6r"]
+
+[ext_resource type="PackedScene" uid="uid://bu6ykigww8n8k" path="res://game_world.tscn" id="1_smx3j"]
+[ext_resource type="PackedScene" uid="uid://3lxje4k5kf1y" path="res://Scenes/main_menu.tscn" id="2_o2178"]
+
+[node name="GameManager" type="Node"]
+
+[node name="GameWorld" parent="." instance=ExtResource("1_smx3j")]
+
+[node name="MainMenu" parent="." instance=ExtResource("2_o2178")]

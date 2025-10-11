@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://bu6ykigww8n8k"]
+
+[ext_resource type="PackedScene" uid="uid://dhjfnsafkm08a" path="res://Scenes/player_character.tscn" id="1_hly68"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bvgre"]
+
+[sub_resource type="Sky" id="Sky_ea1x0"]
+sky_material = SubResource("ProceduralSkyMaterial_bvgre")
+
+[sub_resource type="Environment" id="Environment_e08lw"]
+background_mode = 2
+sky = SubResource("Sky_ea1x0")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_e3xe6"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mcbma"]
+size = Vector2(30, 30)
+
+[node name="GameWorld" type="Node3D"]
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_hly68")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e08lw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_e3xe6")
+
+[node name="TemporaryGround" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_mcbma")
+skeleton = NodePath("../..")
