@@ -1,7 +1,9 @@
+# I just duplicated your script since none of the tutorials I found worked oops
+
 @tool
 extends CollisionShape3D
-@export var TEST_HEIGHTMAP: CompressedTexture2D = preload("uid://cah7n4wqi6s01")
-@export var MAX_HEIGHT = 0.5:
+@export var TEST_HEIGHTMAP: CompressedTexture2D = preload("uid://2s2ok0iykl4n")
+@export var MAX_HEIGHT = 65:
 	set(newHeight):
 		MAX_HEIGHT = newHeight
 		_on_height_set()
