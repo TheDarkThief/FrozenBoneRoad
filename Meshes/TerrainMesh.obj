@@ -1,6 +1,6 @@
 # Blender 4.5.3 LTS
 # www.blender.org
-mtllib Gamejam Heightmap Improved.mtl
+mtllib Gamejam Heightmap Improved NoTextures.mtl
 o Plane
 v -1.000703 0.050739 1.000157
 v -1.000004 -0.014462 -0.861934
