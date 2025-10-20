@@ -49,7 +49,7 @@ text = "Settings"
 
 [node name="SettingsExitButton" type="Button" parent="MarginContainer/VBoxContainer/TitleSection"]
 layout_mode = 2
-text = "X"
+text = "⨉"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
