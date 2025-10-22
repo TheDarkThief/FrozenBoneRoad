@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bu6ykigww8n8k"]
+[gd_scene load_steps=17 format=3 uid="uid://bu6ykigww8n8k"]
 
 [ext_resource type="PackedScene" uid="uid://dhjfnsafkm08a" path="res://Scenes/player_character.tscn" id="1_hly68"]
 [ext_resource type="Script" uid="uid://62cd3krysltr" path="res://MakeHeightMapCollider.gd" id="2_ea1x0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cgs4t5mjjvnvu" path="res://Textures/TestHeightmap.png" id="3_mcbma"]
 [ext_resource type="Texture2D" uid="uid://baln8araf5h8i" path="res://Textures/Heightmap.exr" id="6_ik71a"]
 [ext_resource type="ArrayMesh" uid="uid://5yk53sfg2b33" path="res://Meshes/TerrainMesh.obj" id="7_e7o6u"]
+[ext_resource type="PackedScene" uid="uid://dwan4pvuo058l" path="res://Scenes/Grave.tscn" id="8_e7o6u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bvgre"]
 
@@ -40,7 +41,7 @@ size = Vector2(110, 100)
 [node name="GameWorld" type="Node3D"]
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_hly68")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 33.980778, -2.125)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.291688, 26.80082, -0.7140467)
 wall_min_slide_angle = 0.8848819
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -95,3 +96,6 @@ mesh = SubResource("PlaneMesh_e7o6u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130.4482, 0, 99.86698)
 mesh = SubResource("PlaneMesh_15365")
 skeleton = NodePath("../MeshInstance3D")
+
+[node name="Grave" parent="." instance=ExtResource("8_e7o6u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.399509, 26.18636, -3.3963099)
