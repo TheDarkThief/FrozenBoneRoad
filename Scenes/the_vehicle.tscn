@@ -1,0 +1,131 @@
+[gd_scene load_steps=15 format=3 uid="uid://copvkrawigmom"]
+
+[ext_resource type="Script" uid="uid://bpml3dkogmjk2" path="res://Scenes/vehicle_controller.gd" id="1_a25n1"]
+[ext_resource type="PackedScene" uid="uid://dim8hw2jdlegd" path="res://Meshes/TheVehicle.glb" id="1_o3vkg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0gx1t"]
+size = Vector3(2.5283508, 0.5239258, 7.032755)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8qfv1"]
+size = Vector3(5.6306305, 0.9248047, 4.8986816)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o3vkg"]
+size = Vector3(1.291337, 4.9881783, 13.05777)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xbusl"]
+size = Vector3(6, 0.64245605, 5.4436035)
+
+[sub_resource type="Curve" id="Curve_xbusl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9121798, 0.6776247), -1.3971112, -1.3971112, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4cxuo"]
+curve = SubResource("Curve_xbusl")
+
+[sub_resource type="Curve" id="Curve_1fw7f"]
+_limits = [0.0, 79.0, 0.0, 1.0]
+bake_resolution = 127
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 14.271591), 20.883228, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ndde7"]
+curve = SubResource("Curve_1fw7f")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gvkki"]
+particle_flag_rotate_y = true
+angle_min = -323.6
+angle_max = 258.6
+direction = Vector3(0, 0.1, -0.247)
+spread = 0.0
+initial_velocity_min = 0.5
+initial_velocity_max = 2.55
+gravity = Vector3(0, 1, 0)
+damping_max = 0.2
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 15.74
+scale_over_velocity_curve = SubResource("CurveTexture_ndde7")
+alpha_curve = SubResource("CurveTexture_4cxuo")
+turbulence_noise_strength = 0.1
+turbulence_noise_scale = 2.885
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eyfq0"]
+albedo_color = Color(0.28145856, 0.2814586, 0.2814586, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2bf5b"]
+material = SubResource("StandardMaterial3D_eyfq0")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a25n1"]
+size = Vector3(8.15863, 10.438847, 15.634888)
+
+[node name="TheVehicleController" type="CharacterBody3D"]
+collision_layer = 2
+platform_on_leave = 2
+platform_floor_layers = 4294967281
+script = ExtResource("1_a25n1")
+
+[node name="TheVehicle" parent="." instance=ExtResource("1_o3vkg")]
+
+[node name="PlayerColliders" type="AnimatableBody3D" parent="TheVehicle"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="Ramp" type="CollisionShape3D" parent="TheVehicle/PlayerColliders"]
+transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0.017562866, 2.2453904, -5.1779304)
+shape = SubResource("BoxShape3D_0gx1t")
+
+[node name="MainFloor" type="CollisionShape3D" parent="TheVehicle/PlayerColliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.19, 0.112)
+shape = SubResource("BoxShape3D_8qfv1")
+
+[node name="WallL" type="CollisionShape3D" parent="TheVehicle/PlayerColliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2735858, 6.242862, 0.6833043)
+shape = SubResource("BoxShape3D_o3vkg")
+
+[node name="WallR" type="CollisionShape3D" parent="TheVehicle/PlayerColliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.274, 6.243, 0.683)
+shape = SubResource("BoxShape3D_o3vkg")
+
+[node name="CockFloor" type="CollisionShape3D" parent="TheVehicle/PlayerColliders"]
+transform = Transform3D(1, 0, 0, 0, 0.9549475, 0.2967749, 0, -0.2967749, 0.9549475, 0, 4.88, 4.383)
+shape = SubResource("BoxShape3D_xbusl")
+
+[node name="SmokeStack" type="GPUParticles3D" parent="TheVehicle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.714088, -3.6139612)
+cast_shadow = 0
+gi_mode = 0
+amount = 18
+lifetime = 19.430000000000003
+preprocess = 1.4
+randomness = 0.17
+visibility_aabb = AABB(-4, -4, -4, 8, 65.233, 8)
+process_material = SubResource("ParticleProcessMaterial_gvkki")
+draw_pass_1 = SubResource("BoxMesh_2bf5b")
+
+[node name="SmokeStack2" type="GPUParticles3D" parent="TheVehicle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.96781, 3.9616733)
+cast_shadow = 0
+gi_mode = 0
+amount = 18
+lifetime = 19.430000000000003
+preprocess = 2.0
+randomness = 0.17
+visibility_aabb = AABB(-4, -4, -4, 8, 65.233, 8)
+process_material = SubResource("ParticleProcessMaterial_gvkki")
+draw_pass_1 = SubResource("BoxMesh_2bf5b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08847046, 6.0588894, -0.7470093)
+shape = SubResource("BoxShape3D_a25n1")
+
+[node name="FrontCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 5)
+target_position = Vector3(0, -8, 0)
+
+[node name="LeftWheelCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 5, -4.5)
+target_position = Vector3(0, -8, 0)
+
+[node name="RightWheelCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 5, -4.5)
+target_position = Vector3(0, -8, 0)
