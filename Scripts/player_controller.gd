@@ -7,13 +7,21 @@ const FRICTION = 30
 
 var mouse_sensi = 0.01
 
+var isInControl = true
 
 var move_dir = Vector3(0,0,0)
+
+func setControl(isControl:bool) -> void:
+	isInControl = isControl
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _input(event: InputEvent) -> void:
+	if not isInControl:
+		move_dir = Vector3(0,0,0)
+		return
+	
 	if event is InputEventMouseMotion:
 		rotation.y -= (event.relative.x * mouse_sensi)
 		camera_3d.rotation.x -= (event.relative.y * mouse_sensi)
