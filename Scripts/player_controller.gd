@@ -1,5 +1,17 @@
+class_name Plr
 extends CharacterBody3D
+
+@export var enviroment:WorldEnvironment
+@export var vehicle:TheVehicle
+@export var cool_area: Node3D
+@export var SEC_BEFORE_FREEZING:float = 15.0
+@export var distToDefrost = 3
+@export var DEFROST_SPEED = 4
+var current_freezing_time = 0
+
+@onready var death_vingette: TextureRect = $DeathVingette
 @onready var camera_3d: Camera3D = $Camera3D
+@onready var inter_act_ray: RayCast3D = $Camera3D/InterActRay
 const MAX_TILT = PI/2 -0.01
 const ACCELERATION = 50
 const MAX_SPEED = 3.5
@@ -8,6 +20,7 @@ const FRICTION = 30
 var mouse_sensi = 0.01
 
 var isInControl = true
+var lastInteract: CollisionObject3D = null
 
 var move_dir = Vector3(0,0,0)
 
@@ -17,7 +30,20 @@ func setControl(isControl:bool) -> void:
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
+var debounceInter = false
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Interact") && not debounceInter:
+		debounceInter = true
+		var possInteract = inter_act_ray.get_collider()
+		if possInteract != null && possInteract.has_method("interactWith"):
+			possInteract.interactWith(self)
+			lastInteract = possInteract
+		elif not isInControl && lastInteract != null:
+			lastInteract.interactWith(self)
+			lastInteract = null
+	elif event.is_action_released("Interact"):
+		debounceInter = false
+	
 	if not isInControl:
 		move_dir = Vector3(0,0,0)
 		return
@@ -46,3 +72,11 @@ func _physics_process(delta: float) -> void:
 			friction_force.z if abs(friction_force.z) < abs(velocity.z) else velocity.z
 		velocity -= friction_force
 	self.move_and_slide()
+	
+	if position.distance_to(cool_area.position) < distToDefrost:
+		current_freezing_time = clamp(current_freezing_time - DEFROST_SPEED * delta,\
+			0, SEC_BEFORE_FREEZING)
+	else:
+		current_freezing_time += delta
+		
+	death_vingette.modulate.a = current_freezing_time / SEC_BEFORE_FREEZING

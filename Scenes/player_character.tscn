@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhjfnsafkm08a"]
+[gd_scene load_steps=10 format=3 uid="uid://dhjfnsafkm08a"]
 
 [ext_resource type="Script" uid="uid://cp4rgrrflkhod" path="res://Scripts/player_controller.gd" id="1_qcwfp"]
+[ext_resource type="PackedScene" path="res://Scenes/snow_particles.tscn" id="2_cmdk4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oigcr"]
 radius = 0.3
@@ -10,9 +11,26 @@ height = 1.73
 radius = 0.3
 height = 1.73
 
+[sub_resource type="Compositor" id="Compositor_qcwfp"]
+compositor_effects = Array[CompositorEffect]([null])
+
 [sub_resource type="TorusMesh" id="TorusMesh_qcwfp"]
 inner_radius = 0.059
 outer_radius = 0.229
+
+[sub_resource type="Gradient" id="Gradient_8imnd"]
+offsets = PackedFloat32Array(0, 0.998244, 1)
+colors = PackedColorArray(0, 0.8352941, 1, 0, 0, 0, 0.050980393, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qcwfp"]
+gradient = SubResource("Gradient_8imnd")
+width = 512
+height = 512
+fill = 1
+fill_from = Vector2(0.52298677, 0.48806423)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o0f8b"]
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 collision_layer = 2
@@ -29,7 +47,27 @@ skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3703152, -0.61684966)
+compositor = SubResource("Compositor_qcwfp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0.08412576)
 mesh = SubResource("TorusMesh_qcwfp")
+
+[node name="InterActRay" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.10997355)
+target_position = Vector3(0, 0, -2)
+collision_mask = 8
+collide_with_areas = true
+
+[node name="DeathVingette" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -18.0
+offset_top = -49.0
+offset_right = 1174.0
+offset_bottom = 686.0
+texture = SubResource("GradientTexture2D_qcwfp")
+
+[node name="SnowParticles" parent="." instance=ExtResource("2_cmdk4")]
+transform = Transform3D(0.999999, 0.00137644, -4.90535e-06, -0.00148271, 0.928321, -0.0040791, -1.14692e-06, 0.00379434, 0.997991, 0.577401, 7.2676134, -1.88972)
+draw_passes = 1
+draw_pass_1 = SubResource("PlaneMesh_o0f8b")
