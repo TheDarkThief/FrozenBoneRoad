@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpf7kl38stgjn"]
+
+[ext_resource type="PackedScene" uid="uid://ymenprb35o2p" path="res://Meshes/TheTower.glb" id="1_bbcrf"]
+[ext_resource type="Texture2D" uid="uid://dgd7ujqhwi723" path="res://Textures/TheTowersFlame.png" id="2_yjfel"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bbcrf"]
+transparency = 1
+shading_mode = 0
+disable_fog = true
+albedo_texture = ExtResource("2_yjfel")
+texture_filter = 0
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_yjfel"]
+size = Vector2(40, 40)
+
+[node name="TheTower" instance=ExtResource("1_bbcrf")]
+
+[node name="Tower" parent="." index="0"]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0, 0)
+cast_shadow = 0
+
+[node name="TowerCage" parent="Tower" index="0"]
+cast_shadow = 0
+
+[node name="Flare" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 202.46698, 0)
+material_override = SubResource("StandardMaterial3D_bbcrf")
+mesh = SubResource("QuadMesh_yjfel")
+skeleton = NodePath("")
