@@ -1,10 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://copvkrawigmom"]
+[gd_scene load_steps=16 format=3 uid="uid://copvkrawigmom"]
 
 [ext_resource type="Script" uid="uid://bpml3dkogmjk2" path="res://Scenes/vehicle_controller.gd" id="1_a25n1"]
 [ext_resource type="PackedScene" uid="uid://dim8hw2jdlegd" path="res://Meshes/TheVehicle.glb" id="1_o3vkg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0gx1t"]
 size = Vector3(2.5283508, 0.5239258, 7.032755)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a25n1"]
+size = Vector3(1.6, 0.711, 5.541)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8qfv1"]
 size = Vector3(5.6306305, 0.9248047, 4.8986816)
@@ -74,6 +77,9 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 0.76604444, 0.6427876, 0, -0.6427876, 0.76604444, 0.017562866, 2.2453904, -5.1779304)
 shape = SubResource("BoxShape3D_0gx1t")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TheVehicle/PlayerColliders/Ramp"]
+mesh = SubResource("BoxMesh_a25n1")
+
 [node name="MainFloor" type="CollisionShape3D" parent="TheVehicle/PlayerColliders"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.19, 0.112)
 shape = SubResource("BoxShape3D_8qfv1")
@@ -119,13 +125,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08847046, 6.0588894, -0.74
 shape = SubResource("BoxShape3D_a25n1")
 
 [node name="FrontCast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 7)
 target_position = Vector3(0, -8, 0)
 
 [node name="LeftWheelCast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 5, -4.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 5, -3.5)
 target_position = Vector3(0, -8, 0)
 
 [node name="RightWheelCast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 5, -4.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 5, -3.5)
 target_position = Vector3(0, -8, 0)
+
+[node name="Root" type="CSGBox3D" parent="."]
+
+[node name="FrontRayPos" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+
+[node name="CalculatedPosViz" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)

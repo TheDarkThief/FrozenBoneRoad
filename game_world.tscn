@@ -22,7 +22,6 @@ sky_material = SubResource("ProceduralSkyMaterial_bvgre")
 background_mode = 2
 background_energy_multiplier = 0.69
 sky = SubResource("Sky_ea1x0")
-fog_enabled = true
 
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_ik71a"]
 map_width = 64
