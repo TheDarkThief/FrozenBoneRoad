@@ -18,6 +18,7 @@ func setControl(control):
 
 func _physics_process(delta: float) -> void:
 	if not isBeingControlled:
+		engine_force = 0
 		brake = BRAKE
 		return
 	else:

@@ -5,7 +5,7 @@ extends CharacterBody3D
 @export var vehicle:TheVehicle
 @export var cool_area: Node3D
 @export var SEC_BEFORE_FREEZING:float = 45
-@export var distToDefrost = 3
+@export var distToDefrost = 6
 @export var DEFROST_SPEED = 4
 var current_freezing_time = 0
 
@@ -73,7 +73,7 @@ func _physics_process(delta: float) -> void:
 		velocity -= friction_force
 	self.move_and_slide()
 	
-	if position.distance_to(cool_area.position) < distToDefrost:
+	if position.distance_to(cool_area.global_position) < distToDefrost:
 		current_freezing_time = clamp(current_freezing_time - DEFROST_SPEED * delta,\
 			0, SEC_BEFORE_FREEZING)
 	else:

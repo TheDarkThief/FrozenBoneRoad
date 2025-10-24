@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FrozenBoneProject"
-run/main_scene="uid://bu6ykigww8n8k"
+run/main_scene="uid://ce7t6xe5ywl6r"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
