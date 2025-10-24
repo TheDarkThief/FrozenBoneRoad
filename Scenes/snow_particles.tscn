@@ -1,19 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://jqfggvm5c6tu"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6fpd"]
-transparency = 1
-vertex_color_use_as_albedo = true
-emission_enabled = true
-emission = Color(0.593134, 0.593134, 0.593134, 1)
-backlight_enabled = true
-backlight = Color(0.637843, 0.637843, 0.637843, 1)
-billboard_mode = 1
-proximity_fade_enabled = true
-proximity_fade_distance = 0.3
+[gd_scene load_steps=12 format=3 uid="uid://jqfggvm5c6tu"]
 
 [sub_resource type="Curve" id="Curve_sbjbu"]
-min_value = -360.0
-max_value = 360.0
+_limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 3.95605), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 3
 
@@ -28,7 +16,7 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_xl6qt")
 
 [sub_resource type="Curve" id="Curve_8ecwu"]
-min_value = -1.0
+_limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -42,27 +30,12 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_nbvkk"]
 curve = SubResource("Curve_4mm70")
 
-[sub_resource type="Curve" id="Curve_7vgxq"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.450549), 0.0, 0.0, 0, 0, Vector2(1, 675.165), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_d87gt"]
-curve = SubResource("Curve_7vgxq")
-
-[sub_resource type="Curve" id="Curve_c40qa"]
-max_value = 3.0
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.978261, 0.428571), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_bls64"]
-curve = SubResource("Curve_c40qa")
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v134q"]
 lifetime_randomness = 0.14
 particle_flag_align_y = true
 particle_flag_rotate_y = true
 emission_shape = 3
-emission_box_extents = Vector3(5, 1, 5)
+emission_box_extents = Vector3(10, 1, 10)
 angle_min = -720.0
 angle_max = 720.0
 inherit_velocity_ratio = 0.205
@@ -80,9 +53,6 @@ linear_accel_min = -2.23517e-06
 linear_accel_max = 67.59
 tangential_accel_min = -2.23517e-06
 tangential_accel_max = 12.31
-scale_max = 62.54
-scale_curve = SubResource("CurveTexture_d87gt")
-scale_over_velocity_curve = SubResource("CurveTexture_bls64")
 color = Color(0.987714, 0.991234, 1, 1)
 color_ramp = SubResource("GradientTexture1D_olb1v")
 hue_variation_min = -2.23517e-08
@@ -92,30 +62,26 @@ turbulence_enabled = true
 turbulence_noise_strength = 12.57
 turbulence_noise_scale = 0.0
 collision_mode = 2
-sub_emitter_mode = 1
-sub_emitter_frequency = 5.95
-sub_emitter_keep_velocity = true
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_26ut8"]
-size = Vector2(0.05, 0.05)
-orientation = 2
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cn2b"]
+billboard_mode = 2
+billboard_keep_scale = true
 
-[sub_resource type="Skin" id="Skin_lt2yt"]
+[sub_resource type="QuadMesh" id="QuadMesh_8cn2b"]
+material = SubResource("StandardMaterial3D_8cn2b")
+size = Vector2(0.1, 0.1)
 
 [node name="SnowParticles" type="GPUParticles3D"]
-transform = Transform3D(0.999999, 0.00137644, -4.90535e-06, -0.00148271, 0.928321, -0.0040791, -1.14692e-06, 0.00379434, 0.997991, 0.577401, 2.12593, -1.88972)
-material_override = SubResource("StandardMaterial3D_g6fpd")
+transform = Transform3D(0.999999, 0.00137644, -4.90535e-06, -0.00148271, 0.928321, -0.0040791, -1.14692e-06, 0.00379434, 0.997991, 0, 0, 0)
 amount = 503
 lifetime = 2.32
 preprocess = 3.2
 speed_scale = 0.35
 explosiveness = 0.1
+fixed_fps = 60
 interpolate = false
 collision_base_size = 6.47
 visibility_aabb = AABB(-4, -10, -4, 10, 10, 10)
-local_coords = true
 draw_order = 3
 process_material = SubResource("ParticleProcessMaterial_v134q")
-draw_passes = 2
-draw_pass_2 = SubResource("PlaneMesh_26ut8")
-draw_skin = SubResource("Skin_lt2yt")
+draw_pass_1 = SubResource("QuadMesh_8cn2b")

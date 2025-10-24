@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhjfnsafkm08a"]
+[gd_scene load_steps=9 format=3 uid="uid://dhjfnsafkm08a"]
 
 [ext_resource type="Script" uid="uid://cp4rgrrflkhod" path="res://Scripts/player_controller.gd" id="1_qcwfp"]
-[ext_resource type="PackedScene" path="res://Scenes/snow_particles.tscn" id="2_cmdk4"]
+[ext_resource type="PackedScene" uid="uid://jqfggvm5c6tu" path="res://Scenes/snow_particles.tscn" id="2_cmdk4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oigcr"]
 radius = 0.3
@@ -29,8 +29,6 @@ height = 512
 fill = 1
 fill_from = Vector2(0.52298677, 0.48806423)
 fill_to = Vector2(0, 0)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_o0f8b"]
 
 [node name="PlayerCharacter" type="CharacterBody3D"]
 collision_layer = 2
@@ -68,6 +66,4 @@ offset_bottom = 686.0
 texture = SubResource("GradientTexture2D_qcwfp")
 
 [node name="SnowParticles" parent="." instance=ExtResource("2_cmdk4")]
-transform = Transform3D(0.999999, 0.00137644, -4.90535e-06, -0.00148271, 0.928321, -0.0040791, -1.14692e-06, 0.00379434, 0.997991, 0.577401, 7.2676134, -1.88972)
-draw_passes = 1
-draw_pass_1 = SubResource("PlaneMesh_o0f8b")
+transform = Transform3D(0.999999, 0.00137644, -4.90535e-06, -0.00148271, 0.928321, -0.0040791, -1.14692e-06, 0.00379434, 0.997991, 0, 11, -2)

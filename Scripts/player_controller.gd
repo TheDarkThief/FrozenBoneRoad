@@ -4,7 +4,7 @@ extends CharacterBody3D
 @export var enviroment:WorldEnvironment
 @export var vehicle:TheVehicle
 @export var cool_area: Node3D
-@export var SEC_BEFORE_FREEZING:float = 15.0
+@export var SEC_BEFORE_FREEZING:float = 45
 @export var distToDefrost = 3
 @export var DEFROST_SPEED = 4
 var current_freezing_time = 0

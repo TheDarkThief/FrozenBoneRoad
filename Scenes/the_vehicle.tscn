@@ -116,6 +116,7 @@ size = Vector3(1.6, 0.711, 5.541)
 [sub_resource type="BoxShape3D" id="BoxShape3D_a25n1"]
 
 [node name="VehicleBody3D" type="VehicleBody3D"]
+disable_mode = 2
 collision_layer = 4
 mass = 500.0
 physics_material_override = SubResource("PhysicsMaterial_o3vkg")
