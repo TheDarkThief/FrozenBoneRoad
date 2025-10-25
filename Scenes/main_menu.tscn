@@ -1,4 +1,15 @@
-[gd_scene format=3 uid="uid://3lxje4k5kf1y"]
+[gd_scene load_steps=6 format=3 uid="uid://3lxje4k5kf1y"]
+
+[ext_resource type="Script" uid="uid://b5t41gqplypgd" path="res://Scripts/main_menu.gd" id="1_1ehe0"]
+[ext_resource type="Texture2D" uid="uid://ct4t6ccmuqga2" path="res://Textures/MenuTemp1.png" id="1_48xlc"]
+[ext_resource type="Texture2D" uid="uid://cvd54jkq1eknv" path="res://Textures/MenuTemp2.png" id="2_1ehe0"]
+[ext_resource type="PackedScene" uid="uid://c12gnku114cju" path="res://Scenes/settings_menu.tscn" id="4_ce3w2"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_ce3w2"]
+frames = 2
+frame_0/texture = ExtResource("1_48xlc")
+frame_1/texture = ExtResource("2_1ehe0")
+frame_1/duration = 1.0
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -7,3 +18,74 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1ehe0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BackgroundImage" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BackgroundImage"]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_ce3w2")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Text" type="Panel" parent="CanvasLayer"]
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Text"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -155.0
+offset_right = 305.0
+offset_bottom = -60.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Text/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "the frozen trail"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Text/VBoxContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CanvasLayer/Text/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "start"
+alignment = 0
+autowrap_trim_flags = 0
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/Text/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "settings"
+alignment = 0
+autowrap_trim_flags = 0
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/Text/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "quit"
+alignment = 0
+autowrap_trim_flags = 0
+
+[node name="Settings" parent="CanvasLayer" instance=ExtResource("4_ce3w2")]
+visible = false
+
+[connection signal="pressed" from="CanvasLayer/Text/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Text/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Text/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

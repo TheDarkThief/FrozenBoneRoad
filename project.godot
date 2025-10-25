@@ -11,13 +11,22 @@ config_version=5
 [application]
 
 config/name="FrozenBoneProject"
-run/main_scene="uid://ce7t6xe5ywl6r"
+run/main_scene="uid://3lxje4k5kf1y"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
 
 [filesystem]
 
 import/blender/enabled=false
+
+[gui]
+
+theme/custom="uid://o5uoqrinpamr"
 
 [input]
 
